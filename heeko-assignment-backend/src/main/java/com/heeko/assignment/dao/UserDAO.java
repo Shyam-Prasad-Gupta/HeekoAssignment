@@ -1,5 +1,7 @@
 package com.heeko.assignment.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,6 +28,10 @@ public class UserDAO {
 			return true;
 		}
 		return false;
+	}
+
+	public List<User> findAll() {
+		return userRepo.findAll();
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.heeko.assignment.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,10 @@ public class UserService {
 
 	public String giveMeToken() {
 		return "Token:" + UUID.randomUUID().toString() + System.currentTimeMillis();
+	}
+
+	public List<User> getAllUsers() {
+		return userDAO.findAll();
 	}
 
 }

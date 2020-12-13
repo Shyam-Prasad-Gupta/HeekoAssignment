@@ -1,5 +1,7 @@
 package com.heeko.assignment.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.heeko.assignment.entity.User;
 import com.heeko.assignment.model.AuthDataJson;
+import com.heeko.assignment.model.ResponseBody;
 import com.heeko.assignment.service.UserService;
 
 @RestController
@@ -71,6 +75,21 @@ public class SignInSignUpController {
 			message = "Something went wrong! Please try again.";
 		}
 		return message;
+	}
+
+	@CrossOrigin
+	@GetMapping(value = "users")
+	public ResponseBody<List<User>> getAllUsers(final HttpServletRequest request, final HttpServletResponse response) {
+
+		ResponseBody<List<User>> resBody = new ResponseBody<List<User>>();
+		try {
+			response.setStatus(HttpStatus.OK.value());
+			resBody.setData(userService.getAllUsers());
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		}
+		return resBody;
 	}
 
 	@CrossOrigin
